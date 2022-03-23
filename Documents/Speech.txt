@@ -1,0 +1,134 @@
+Good morning everyone,
+our project is Deteccion de mascara,
+this are some of the topics which we will
+presenting you.
+
+First we will start with introduction on what
+our project is and why it is required.
+Then we will go through the objectives
+,scopes and after that we will go in detail
+on how we built our project.
+At last we would be looking at the work which
+we would be performing to complete this
+project in Future works.
+
+In 2019 the world was taken as surprise
+as the it saw the growth of COVID-19 virus
+which became worse in the year 2020 anf further.
+Since then one of the major changes in everyone's
+life is to wear face masks. According to WHO study,
+wearing face masks in public place can reduce 70% chances
+of contracting this virus. But due to lack of social 
+responsibilities and carelessness of people
+it is becoming difficult to stop the spread of 
+this virus.
+
+So, the detection of the people not wearing
+face masks is really important. This can be 
+done our project. "Deteccion de mascara"
+is the deep learning model which uses various 
+python libraries to detect if the people
+are wearing the face masks are not from the
+images as well as real-time videos. If people
+are detected not wearing the face masks, the system
+can recognizes them and a log is created which can be further
+send to the government authoritites or organizers of event.
+The meaning of deteccion de mascara is spanish is the 
+detection of mask. 
+
+
+Objectives
+
+The major objectives of our system is to create
+a user interface where the person attending
+any event can register itself with all it's details
+including his/her image. Then we would train a model
+which will be using the supervised learning approach to detect face masks.
+The datasets used to train this model must be cleaned and 
+well labelled. Then we use the CNN to train our model using the
+dataset. Then the model is tested again the test
+dataset to determine it's accuracy. The final step 
+of the project is the deployment of this system 
+to perform the tasks on real-time videos.
+
+
+SCOPE
+
+The scope of this system can be vast. Some of them are
+mentioned here. One of major application of this system is to
+generate E-challans. With the help of this, the government 
+authorities can take strict actions against the people who 
+break the guidelines given by them. Witht the reopening of
+school and colleges, it can be used in 
+educational institutes to monitor the activity of students and
+staff to ensure everyone's safety hygiene.
+By including this system with CCTV cameras in public places 
+the health of the people can also be ensured.
+
+
+Face Detection
+
+For detecting the face masks the very first stage is to detect
+the faces in the videos. Various object detection approaches 
+can be used to train our model to detect the faces. The most
+prominent one used among all these approaches is the Haar Cascade
+which detects the facial features with the help of mathematical 
+calculation on the pixel of images. But it fails to detect the faces
+in the regions which do not have proper lighting. So, improve the performance 
+of our model we have used SSD as a face detector. It uses a single neural network
+to detect faces so it is called one stage detector. The CNN is used to detect
+the facial featured from the images. The accuracy and the speed of  SSD is
+very high. SSD is better at detecting features from low resolution images.
+
+
+Training
+
+The dataset that we have collected to train the model
+is splitted in the ratio of 80% to 20%. 80% is used to train the 
+model and 20% is used to test the model to evaluate it's accuracy.
+The split is done with the help of train_test_split method of
+scikit library. There are some libraries that we have made use of in training.
+
+OpenCV is used for starting the live video stream and manipulate
+the images from the live stream. It is also used to draw the bounding box around the
+face.
+Matplotlib is used for plotting the images graphically,
+Numpy is used to perform the mathematical operations on the array of pixels
+coming from frames of live-video.
+Tensorflow and keras were use to perform the preprocessing pf our images and training the 
+CNN model. The MobileNetV2 is used from tensorflow
+and keras as a base of our model.
+
+
+MobileNetV2
+
+MobileNetV2 is a deep learning model based on Convolutional Neural Network
+It uses convolution layer as a fundamental block. It uses sliding window
+mechanism to extract features from the images, which helps in the generation
+of feature maps. Pooling layer is used to reduce the no of calculations
+to be made.Dropout layer reduces the chances of Overfitting of our model.
+BottleNeck layer(FROM ABSTRACT)
+
+
+Data Augmentation
+
+When we train our model using this dataset it is 
+not capable to perform on the images which have any type of inversion,
+rotation,etc. So, to improve performance of our model, we need to train
+it with such type images which can be done by data augmentation.
+Data Augmentation is method through which we can develop 
+new images datasets from the existing datasets by rotating, zooming, etc on 
+them. This is done by the method ImageDataGenerator() which is part of keras 
+preprocessing library. This helps in increaing the volume of our dataset.
+
+
+Training
+
+While training, we tried various values for hyperparameters. The model with the 'adam' 
+Optimizer and 'binary_crossentropy' loss function is used. The accuracy that we achieved
+so far is 0.95 and F1-Score is 0.96. We have trained it for 10 EPOCHS, which can be further increase
+to better the accuracy of the model. We used ReLU as activation in Hidden layers as the give output other 
+than 0 only when input is greater than 0. The softmax activation function is used in the output 
+layer to normalise the probabilities of our output.
+
+
