@@ -92,4 +92,4 @@ def registration():
 
     return render_template("registration.html")
 
-application.run(debug=True)
+application.run(debug=True,port=5001)
