@@ -1,8 +1,12 @@
-from flask import Flask, render_template, request
+from tkinter import Image
+from flask import Flask, render_template, request,redirect,url_for
 import mysql.connector
 import os
-from flask_mail import Mail
+from flask_mail import Mail,Message
+from numpy import imag
+import pandas as pd
 
+# from jinja2 import url_for
 app = Flask(__name__)
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
@@ -47,7 +51,8 @@ def required_page():
 
 @app.route("/runcode/", methods=['GET', 'POST'])
 def run_code():
-    os.system("python MaskDetection.py")
+
+    os.system("start python MaskDetection.py")
     return render_template("required.html")
 
 @app.route("/sendemail/", methods=['GET', 'POST'])
@@ -59,21 +64,43 @@ def send_email():
         
         for line in f:
             entry = line.split(',')
-            email=entry[1]
+            email=entry[2]
             
-            if email not in emailList and email!='' and email!='email':
+            if email not in emailList and email!='' and email!='email' and email!='unnamed' and email!='0':
                 emailList.append(entry[1])
-                time = entry[2]
-                date = entry[3]
-                path=r'C:\Users\Dell\Desktop\Jainam docs\Deteccion de mascara\Admin\Detected\\'+email.jpeg
-                with open(path, 'rb') as fp:
-                    msg.add_related(
-                    fp.read(), 'image', 'jpeg', cid=attachment_cid)
+                time = entry[3]
+                date = entry[4]
+                msg=Message('Notification',sender ='projectsupervisor124@gmail.com', recipients = [email], body='Detected at : '+time+' on Date : '+date)
+                path = r'.\Detected/'+email.lower()+'.jpeg'
+                with app.open_resource(path) as fp:  
+                    msg.attach(path,"image/jpeg",fp.read())
+                    mail.send(msg)
+    
+    data=pd.read_csv('Log.csv')
 
-                mail.send_message('Notification',sender ='projectsupervisor124@gmail.com', recipients = [email], body='Detected at : '+time+' on Date : '+date)        
+    names = []
+    for x in data.columns:
+        if x=='email' or x=='time' or x=='date' or x==' ':
+            names.append(x)
+    print(names)
+    df_b = pd.DataFrame(columns=names)
+    print(df_b)
+    df_b.to_csv('Log.csv')
+    
+    data=pd.read_csv('FinalLog.csv')
+
+    names = []
+    for x in data.columns:
+        if x=='email' or x=='time' or x=='date' or x==' ':
+            names.append(x)
+    print(names)
+    df_b = pd.DataFrame(columns=names)
+    print(df_b)
+    df_b.to_csv('FinalLog.csv')
                 
     print(emailList)
-    
+    # return render_template(url_for('http://127.0.0.1:5000/required.html'))
+
     return render_template("required.html")
 
 

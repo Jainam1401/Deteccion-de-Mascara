@@ -102,7 +102,7 @@ my_cursor=conn.execute("SELECT * FROM  register")
 my_result=my_cursor.fetchall()
 for row  in my_result:
     print(row)
-    fob=open(r'Database Images/'+ str(row[0])+'.jpeg','wb')
+    fob=open(r'C:\Users\Dell\Desktop\Jainam docs\Deteccion de mascara\Admin\Database Images/'+ str(row[0])+'.jpeg','wb')
     fob=fob.write(row[3])
 
 
@@ -139,14 +139,14 @@ for row  in my_result:
 # In[8]:
 
 
-path=r"Database Images"
+path=r"C:\Users\Dell\Desktop\Jainam docs\Deteccion de mascara\Admin\Database Images"
 personimages=[]
 emails=[]
 imagelist=os.listdir(path)
 print(imagelist)
 
 
-# In[9]:
+# In[8]:
 
 
 for current_img in imagelist:
@@ -160,7 +160,7 @@ for current_img in imagelist:
 print(emails)
 
 
-# In[10]:
+# In[9]:
 
 
 def faceEncodings(images):
@@ -175,7 +175,7 @@ def faceEncodings(images):
     return encodeList
 
 
-# In[11]:
+# In[13]:
 
 
 def addLog(email):
@@ -196,7 +196,7 @@ def addLog(email):
         
 
 
-# In[12]:
+# In[1]:
 
 
 import matplotlib.pyplot as plt
@@ -205,7 +205,7 @@ from PIL import Image as im
 import pandas as pd
 
 
-# In[13]:
+# In[14]:
 
 
 enc=faceEncodings(personimages)
@@ -251,12 +251,12 @@ while True:
                         name=emails[matchIndex].upper()
                         print(name)
                         data = im.fromarray(faces)
-                        data.save(r'Detected/'+name.lower()+'.jpeg')
+                        data.save(r'C:\Users\Dell\Desktop\Jainam docs\Deteccion de mascara\Admin\Detected/'+name.lower()+'.jpeg')
 #                         fob=open(r'C:\Users\Dell\Desktop\Jainam docs\Deteccion de mascara\Database Images/'+name+'.jpeg','wb')
 #                         fob=fob.write(row[3])
 #                         mail=conn.execute("INSERT INTO  images(email,img) VALUES (%s,%s)",name,faces.read())
 #                         print("Row Added  = ",mail.rowcount)
-                        text=label
+                        text=label+" "+name
                         cv2.putText(frame, text, (startX, startY - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.45, color, 2)
                         cv2.rectangle(frame, (startX, startY), (endX, endY), color, 2)
                         addLog(name)            
@@ -264,18 +264,21 @@ while True:
         cv2.imshow("Live Video",frame)
         if cv2.waitKey(2) == 27:
             break
+else:
+    
+    data=pd.read_csv('Log.csv')
+    data = data.sort_values(by = ['date', 'time'], ascending = [False, False])
+    data.drop_duplicates(subset="email",inplace=True)
+    # data
+    data.to_csv('FinalLog.csv')
 capture.release()
 cv2.destroyAllWindows()
 
 
-# In[14]:
+# In[ ]:
 
 
-data=pd.read_csv('Log.csv')
-data = data.sort_values(by = ['date', 'time'], ascending = [False, False])
-data.drop_duplicates(subset="email",inplace=True)
-# data
-data.to_csv('FinalLog.csv')
+
 
 
 # In[ ]:

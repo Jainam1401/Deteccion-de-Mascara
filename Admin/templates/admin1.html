@@ -15,43 +15,24 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="{{ url_for('static' , filename = 'mask-icon.png') }}"
-      style="display: block"
-    />
-    <style>
-      a:link {
-        text-decoration: none;
-        color: black;
-      }
-    </style>
-    <title>Deteccion de Mascara</title>
+
+    <title>Admin</title>
   </head>
 
   <body>
-    <div class="row">
-      <img
-        name="image"
-        id="image"
-        src="static/dataoriginal.jpg"
-        width="320px"
-        height="400px"
-      />
-    </div>
-    <br />
-    <br />
-    <div style="padding: 30px">
+    <section
+      class="vh-100 bg-image"
+      style="background-color: rgb(39, 209, 181)"
+    >
       <div class="row d-flex justify-content-left align-items-center h-100">
-        <div class="col-md-6 col-xl-6">
+        <div class="col-md-4 col-xl-6">
           <div
             class="card"
             style="border-radius: 15px; box-shadow: 10px 5px 5px #000"
           >
             <div class="card-body p-5">
               <h2 class="text-uppercase text-center mb-5">Detection</h2>
-              <h5 style="text-align: center">
+              <h5>
                 Click on the below button to start the surveillance camera.
               </h5>
               <div class="d-flex justify-content-center">
@@ -66,20 +47,24 @@
                     >
                   </button>
                 </div>
+                <!-- <button
+                type="submit"
+                class="btn btn-outline-dark btn-lg gradient-custom-4"
+              >
+                <a href="/runcode/">Start</a>
+              </button> -->
               </div>
             </div>
           </div>
         </div>
-        <div class="col-md-6 col-xl-6">
+        <div class="col-md-4 col-xl-6">
           <div
             class="card"
             style="border-radius: 15px; box-shadow: 10px 5px 5px #000"
           >
             <div class="card-body p-5">
               <h2 class="text-uppercase text-center mb-5">Email</h2>
-              <h5 style="text-align: center">
-                Click on the send button to send the emails to the users.
-              </h5>
+              <h5>Click on the send button to send the emails to the users.</h5>
               <div class="d-flex justify-content-center">
                 <div class="col-md-5">
                   <br />
@@ -93,17 +78,17 @@
                   </button>
                 </div>
                 <!-- <button
-                        type="submit"
-                        class="btn btn-outline-dark btn-lg gradient-custom-4"
-                      >
-                        <a href="/sendemail/">Send</a>
-                      </button> -->
+                type="submit"
+                class="btn btn-outline-dark btn-lg gradient-custom-4"
+              >
+                <a href="/sendemail/">Send</a>
+              </button> -->
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
     <!-- Optional JavaScript; choose one of the two! -->
 
