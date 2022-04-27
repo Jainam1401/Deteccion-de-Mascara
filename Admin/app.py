@@ -53,7 +53,8 @@ def required_page():
 def run_code():
 
     os.system("start python MaskDetection.py")
-    return render_template("required.html")
+    print("Called")
+    return "Press Back button to move to dashboard"
 
 @app.route("/sendemail/", methods=['GET', 'POST'])
 def send_email():
@@ -100,8 +101,8 @@ def send_email():
                 
     print(emailList)
     # return render_template(url_for('http://127.0.0.1:5000/required.html'))
-
-    return render_template("required.html")
+    return "Press Back button to move to dashboard"
+    # return render_template("required.html")
 
 
 if __name__ == "__main__":
