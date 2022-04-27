@@ -2,10 +2,17 @@ from flask import Flask,render_template,request
 from flask_sqlalchemy import SQLAlchemy
 import mysql.connector
 import json
+from flask_mail import Mail,Message
 
 from sqlalchemy import null
 
 application = Flask(__name__)
+application.config['MAIL_SERVER']='smtp.gmail.com'
+application.config['MAIL_PORT'] = 465
+application.config['MAIL_USERNAME'] = 'projectsupervisor124@gmail.com'
+application.config['MAIL_PASSWORD'] = '10162738'
+application.config['MAIL_USE_SSL'] = True
+mail = Mail(application)
 
 with open("02_config.json","r") as d:
     parameters = json.load(d)["parameters"]
@@ -55,11 +62,9 @@ def contact():
         email = request.form.get("email")
         phone_number = request.form.get("phone_number")
         message = request.form.get("message")
-
-        Entry1 = Contact(Name = name , Email = email , Phone_Number = phone_number , Message = message)
-        database.session.add(Entry1)
-        database.session.commit()
-
+        em="projectsupervisor124@gmail.com"
+        msg=Message('Mail from User',sender ='projectsupervisor124@gmail.com', recipients = [em], body=" "+email+" has mailed you.\n Message : "+message+" \n Name : "+name+" \n Phone Number : "+phone_number)
+        mail.send(msg)
     return render_template("contact.html")
 
 @application.route("/registration" , methods = ["POST" , "GET"])
@@ -85,6 +90,8 @@ def registration():
         mydb.commit()
         mycursor.close()
         mydb.close()
+        msg=Message('Registered',sender ='projectsupervisor124@gmail.com', recipients = [email], body='You are Successfully registered.')
+        mail.send(msg)
         # mycursor = mydb.cursor()
         # Entry2 = Register(Name = name , Email = email , Phone_Number = phone_number , Image = image)
         # database.session.add(Entry2)
